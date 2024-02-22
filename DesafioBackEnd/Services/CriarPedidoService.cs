@@ -14,7 +14,7 @@ namespace Parfois.DesafioBackEnd.Services
 
         public async Task<bool> CriarPedidoAsync(CriarPedidoRequest request)
         {
-            var pedidoExiste = _repository.PedidoExiste(request.Numero);
+            var pedidoExiste = _repository.PedidoExiste(request.Codigo);
             if (pedidoExiste)
             {
                 return false;

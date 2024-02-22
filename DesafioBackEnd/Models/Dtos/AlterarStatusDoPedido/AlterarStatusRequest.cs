@@ -5,7 +5,7 @@ namespace Parfois.DesafioBackEnd.Models.Dtos.AlterarStatusDoPedido
     public class AlterarStatusRequest
     {
         [JsonPropertyName("pedido")]
-        public string NumeroDoPedido { get; set; }
+        public string CodigoDoPedido { get; set; }
 
         public int ItensAprovados { get; set; }
 

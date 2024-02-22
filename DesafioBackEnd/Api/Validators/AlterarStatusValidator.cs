@@ -8,7 +8,7 @@ namespace Parfois.DesafioBackEnd.Api.Validators
         public AlterarStatusValidator()
         {
             RuleFor(request => request.Status).NotNull().NotEmpty();
-            RuleFor(request => request.NumeroDoPedido).NotNull().NotEmpty();
+            RuleFor(request => request.CodigoDoPedido).NotNull().NotEmpty();
             RuleFor(request => request.ItensAprovados).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
             RuleFor(request => request.ValorAprovado).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
         }

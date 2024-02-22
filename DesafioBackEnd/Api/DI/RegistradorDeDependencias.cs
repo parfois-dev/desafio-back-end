@@ -16,6 +16,7 @@ namespace Parfois.DesafioBackEnd.Api.DI
         {
             serviceCollection.AddSingleton<IRepository, LocalRepository>();
             serviceCollection.AddTransient<ICriarPedidoService, CriarPedidoService>();
+            serviceCollection.AddTransient<IAlterarStatusDoPedidoService, AlterarStatusDoPedidoService>();
 
             serviceCollection.AddTransient<AbstractValidator<CriarPedidoRequest>, CriarPedidoValidator>();
             serviceCollection.AddTransient<AbstractValidator<AlterarStatusRequest>, AlterarStatusValidator>();

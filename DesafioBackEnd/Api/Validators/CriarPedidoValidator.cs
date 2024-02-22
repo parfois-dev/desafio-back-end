@@ -7,7 +7,7 @@ namespace Parfois.DesafioBackEnd.Api.Validators
     {
         public CriarPedidoValidator()
         {
-            RuleFor(request => request.Numero).NotNull().NotEmpty();
+            RuleFor(request => request.Codigo).NotNull().NotEmpty();
             RuleFor(request => request.Itens).NotNull().NotEmpty();
             RuleForEach(request => request.Itens).ChildRules(item =>
             {

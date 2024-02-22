@@ -17,17 +17,20 @@ namespace Parfois.DesafioBackEnd.Api.Controllers
         private readonly AbstractValidator<CriarPedidoRequest> _criarPedidoValidator;
         private readonly AbstractValidator<AlterarStatusRequest> _alterarStatusValidator;
         private readonly ICriarPedidoService _criarPedidoService;
+        private readonly IAlterarStatusDoPedidoService _alterarStatusDoPedidoService;
 
         public PedidosController(
             ILogger<PedidosController> logger,
             AbstractValidator<CriarPedidoRequest> criarPedidoValidator,
             AbstractValidator<AlterarStatusRequest> alterarStatusValidator,
-            ICriarPedidoService criarPedidoService)
+            ICriarPedidoService criarPedidoService,
+            IAlterarStatusDoPedidoService alterarStatusDoPedidoService)
         {
             _logger = logger;
             _criarPedidoValidator = criarPedidoValidator;
             _alterarStatusValidator = alterarStatusValidator;
             _criarPedidoService = criarPedidoService;
+            _alterarStatusDoPedidoService = alterarStatusDoPedidoService;
         }
 
         [HttpPost]
@@ -67,9 +70,9 @@ namespace Parfois.DesafioBackEnd.Api.Controllers
                     return BadRequest(ErroHelper.FormatarErros(resultadoDaValidacao));
                 }
 
-                var result = new AlterarStatusResponse();
+                var resposta = await _alterarStatusDoPedidoService.AlterarStatusDoPedidoAsync(request);
 
-                return Ok(result);
+                return Ok(resposta);
             }
             catch (Exception exception)
             {

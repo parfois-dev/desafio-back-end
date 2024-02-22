@@ -11,7 +11,7 @@ namespace Parfois.DesafioBackEnd.Api.Controllers.Swagger
                 "Copo & Prato request example",
                 new CriarPedidoRequest
                 {
-                    Numero = "123456",
+                    Codigo = "123456",
                     Itens =
                 [
                     new Item
