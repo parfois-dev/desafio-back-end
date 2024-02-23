@@ -1,16 +1,14 @@
-﻿using Parfois.DesafioBackEnd.Models.Dtos.AlterarStatusDoPedido;
+﻿using Parfois.DesafioBackEnd.Models;
 using Parfois.DesafioBackEnd.Models.Dtos.CriarPedido;
 
 namespace Parfois.DesafioBackEnd.Repository
 {
     public interface IRepository
     {
-        bool PedidoExiste(string codigoDoPedido);
+        Task<bool> PedidoExisteAsync(string codigoDoPedido);
 
-        bool CriarPedido(CriarPedidoRequest pedido);
+        Task<bool> CriarPedido(CriarPedidoRequest pedido);
 
-        bool AtualizarPedido(AlterarStatusRequest alterarStatusDoPedido);
-
-        CriarPedidoRequest ObterPedido(string codigoDoPedido);
+        Task<Pedido> ObterPedidoAsync(string codigoDoPedido);
     }
 }

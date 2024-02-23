@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Parfois.DesafioBackEnd.Api.Controllers.Swagger;
+using Microsoft.EntityFrameworkCore;
 using Parfois.DesafioBackEnd.Api.Validators;
 using Parfois.DesafioBackEnd.Models.Dtos.AlterarStatusDoPedido;
 using Parfois.DesafioBackEnd.Models.Dtos.CriarPedido;
@@ -14,12 +14,14 @@ namespace Parfois.DesafioBackEnd.Api.DI
     {
         public static void RegistrarComponentes(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IRepository, LocalRepository>();
+            serviceCollection.AddTransient<IRepository, LocalRepository>();
             serviceCollection.AddTransient<ICriarPedidoService, CriarPedidoService>();
             serviceCollection.AddTransient<IAlterarStatusDoPedidoService, AlterarStatusDoPedidoService>();
 
             serviceCollection.AddTransient<AbstractValidator<CriarPedidoRequest>, CriarPedidoValidator>();
             serviceCollection.AddTransient<AbstractValidator<AlterarStatusRequest>, AlterarStatusValidator>();
+
+            serviceCollection.AddDbContext<DesafioContext>(opt => opt.UseInMemoryDatabase(nameof(DesafioBackEnd)));
 
             serviceCollection.AddSwaggerGen(options =>
             {

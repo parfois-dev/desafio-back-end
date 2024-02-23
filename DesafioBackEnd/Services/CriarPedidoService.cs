@@ -14,13 +14,13 @@ namespace Parfois.DesafioBackEnd.Services
 
         public async Task<bool> CriarPedidoAsync(CriarPedidoRequest request)
         {
-            var pedidoExiste = _repository.PedidoExiste(request.Codigo);
+            var pedidoExiste = await _repository.PedidoExisteAsync(request.Codigo);
             if (pedidoExiste)
             {
                 return false;
             }
 
-            return _repository.CriarPedido(request);
+            return await _repository.CriarPedido(request);
         }
     }
 }

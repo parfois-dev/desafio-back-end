@@ -7,12 +7,15 @@ namespace Parfois.DesafioBackEnd.Models.Dtos.CriarPedido
         [JsonPropertyName("pedido")]
         public string Codigo { get; set; }
 
-        public IEnumerable<Item> Itens { get; set; }
+        public IEnumerable<ItemRequest> Itens { get; set; }
 
-        [JsonIgnore]
-        public decimal ValorTotal => Itens.Sum(item => item.PrecoUnitario * item.Quantidade);
-
-        [JsonIgnore]
-        public decimal TotalDeItens => Itens.Count();
+        public Pedido ConvertToPedido()
+        {
+            return new Pedido
+            {
+                Codigo = Codigo,
+                Itens = Itens.Select(item => item.ConvertToItem()).ToArray(),
+            };
+        }
     }
 }

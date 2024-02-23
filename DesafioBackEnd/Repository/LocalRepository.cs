@@ -1,62 +1,37 @@
-﻿using Parfois.DesafioBackEnd.Models.Dtos.AlterarStatusDoPedido;
+﻿using Microsoft.EntityFrameworkCore;
+using Parfois.DesafioBackEnd.Models;
 using Parfois.DesafioBackEnd.Models.Dtos.CriarPedido;
 
 namespace Parfois.DesafioBackEnd.Repository
 {
     public class LocalRepository : IRepository
     {
-        protected IList<CriarPedidoRequest> Pedidos { get; set; }
+        private readonly DesafioContext _desafioContext;
 
-        protected IList<AlterarStatusRequest> StatusDosPedidos { get; set; }
-
-        public LocalRepository()
+        public LocalRepository(DesafioContext desafioContext)
         {
-            Pedidos = new List<CriarPedidoRequest>();
-            StatusDosPedidos = new List<AlterarStatusRequest>();
+            _desafioContext = desafioContext;
         }
 
-        public bool CriarPedido(CriarPedidoRequest pedido)
+        public async Task<bool> CriarPedido(CriarPedidoRequest pedido)
         {
-            Pedidos.Add(pedido);
+            await _desafioContext.Pedidos.AddAsync(pedido.ConvertToPedido());
+
+            await _desafioContext.SaveChangesAsync();
 
             return true;
         }
 
-        public bool PedidoExiste(string codigoDoPedido)
+        public async Task<bool> PedidoExisteAsync(string codigoDoPedido)
         {
-            return Pedidos.Any(pedido => pedido.Codigo.Equals(codigoDoPedido, StringComparison.OrdinalIgnoreCase));
+            return await _desafioContext.Pedidos.AnyAsync(pedido => pedido.Codigo.Equals(codigoDoPedido, StringComparison.OrdinalIgnoreCase));
         }
 
-        public bool StatusExiste(string codigoDoPedido)
+        public async Task<Pedido> ObterPedidoAsync(string codigoDoPedido)
         {
-            return StatusDosPedidos.Any(pedido => pedido.CodigoDoPedido.Equals(codigoDoPedido, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public AlterarStatusRequest ObterStatusDoPedido(string codigoDoPedido)
-        {
-            return StatusDosPedidos.First(status => status.CodigoDoPedido.Equals(codigoDoPedido, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public CriarPedidoRequest ObterPedido(string codigoDoPedido)
-        {
-            return Pedidos.First(status => status.Codigo.Equals(codigoDoPedido, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public bool AtualizarPedido(AlterarStatusRequest alterarStatusDoPedido)
-        {
-            var status = ObterStatusDoPedido(alterarStatusDoPedido.CodigoDoPedido);
-
-            status.ItensAprovados = alterarStatusDoPedido.ItensAprovados;
-            status.ValorAprovado = alterarStatusDoPedido.ValorAprovado;
-
-            return true;
-        }
-
-        public bool CriarStatus(AlterarStatusRequest alterarStatusDoPedido)
-        {
-            StatusDosPedidos.Add(alterarStatusDoPedido);
-
-            return true;
+            return await _desafioContext.Pedidos
+                .Include(pedido => pedido.Itens)
+                .FirstAsync(status => status.Codigo.Equals(codigoDoPedido, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

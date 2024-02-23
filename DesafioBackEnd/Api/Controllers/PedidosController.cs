@@ -5,7 +5,6 @@ using Parfois.DesafioBackEnd.Api.Helpers;
 using Parfois.DesafioBackEnd.Models.Dtos.AlterarStatusDoPedido;
 using Parfois.DesafioBackEnd.Models.Dtos.CriarPedido;
 using Parfois.DesafioBackEnd.Services.Interfaces;
-using Swashbuckle.AspNetCore.Filters;
 
 namespace Parfois.DesafioBackEnd.Api.Controllers
 {

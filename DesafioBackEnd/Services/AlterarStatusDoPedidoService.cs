@@ -15,7 +15,7 @@ namespace Parfois.DesafioBackEnd.Services
 
         public async Task<AlterarStatusResponse> AlterarStatusDoPedidoAsync(AlterarStatusRequest alterarStatusRequest)
         {
-            var pedidoExiste = _repository.PedidoExiste(alterarStatusRequest.CodigoDoPedido);
+            var pedidoExiste = await _repository.PedidoExisteAsync(alterarStatusRequest.CodigoDoPedido);
             if (!pedidoExiste)
             {
                 return new AlterarStatusResponse
@@ -25,7 +25,7 @@ namespace Parfois.DesafioBackEnd.Services
                 };
             }
 
-            var pedido = _repository.ObterPedido(alterarStatusRequest.CodigoDoPedido);
+            var pedido = await _repository.ObterPedidoAsync(alterarStatusRequest.CodigoDoPedido);
 
             return new AlterarStatusResponse
             {

@@ -2,7 +2,7 @@
 
 namespace Parfois.DesafioBackEnd.Models.Dtos.CriarPedido
 {
-    public class Item
+    public class ItemRequest
     {
         public string Descricao { get; set; }
 
@@ -10,5 +10,15 @@ namespace Parfois.DesafioBackEnd.Models.Dtos.CriarPedido
 
         [JsonPropertyName("qtd")]
         public int Quantidade { get; set; }
+
+        public Item ConvertToItem()
+        {
+            return new Item
+            {
+                Descricao = Descricao,
+                PrecoUnitario = PrecoUnitario,
+                Quantidade = Quantidade
+            };
+        }
     }
 }

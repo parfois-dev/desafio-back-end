@@ -14,13 +14,13 @@ namespace Parfois.DesafioBackEnd.Api.Controllers.Swagger
                     Codigo = "123456",
                     Itens =
                 [
-                    new Item
+                    new ItemRequest
                     {
                         Descricao = "Copo",
                         PrecoUnitario = 3,
                         Quantidade = 10
                     },
-                    new Item
+                    new ItemRequest
                     {
                         Descricao = "Prato",
                         PrecoUnitario = 4,
