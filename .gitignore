@@ -1,0 +1,64 @@
+# Ignore build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio directories
+.vs/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Test results
+TestResults/
+
+# NuGet Packages
+packages/
+*.nupkg
+!.nuget/packages.config
+
+# Others
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlh
+*.tli
+*.vsmdi
+*_i.obj
+*.cache
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+build/
+bld/
+x64/
+x86/
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+Thumbs.db
+.DS_Store
